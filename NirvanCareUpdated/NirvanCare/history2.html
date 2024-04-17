@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Health Summary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .patient-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .patient-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .patient-details {
+            font-size: 1.2rem;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px; /* Increased gap */
+        }
+        .chart-container {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px; /* Increased margin */
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Increased margin */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .chart-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 1000;
+        }
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .popup-chart {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+        }
+        .tooltip-info {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            pointer-events: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Health Summary</h1>
+        <div class="patient-info">
+            <img src="https://www.shutterstock.com/image-photo/passport-photo-portrait-middle-aged-260nw-1506715724.jpg" alt="Patient Photo" class="patient-photo">
+            <div class="patient-details">
+                <p>Name: John Doe</p>
+                <p>Date of Birth: January 1, 1980</p>
+                <p>Place of Birth: Ohio, United States Of America</p>
+                <p>Mobile Number: +1234567890</p>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="chart-container">
+                <h2>Illness Count</h2>
+                <canvas id="illnessChart" data-chart="illnessChart"></canvas>
+                <table class="data-table" id="illnessTable"></table>
+            </div>
+            <div class="chart-container">
+                <h2>Hospitalization Count</h2>
+                <canvas id="hospitalizationChart" data-chart="hospitalizationChart"></canvas>
+                <table class="data-table" id="hospitalizationTable"></table>
+            </div>
+            <div class="chart-container">
+                <h2>Money Spent (in ₹)</h2>
+                <canvas id="moneySpentChart" data-chart="moneySpentChart"></canvas>
+                <table class="data-table" id="moneySpentTable"></table>
+            </div>
+            <div class="chart-container">
+                <h2>Doctor Visits</h2>
+                <canvas id="doctorVisitsChart" data-chart="doctorVisitsChart"></canvas>
+                <table class="data-table" id="doctorVisitsTable"></table>
+            </div>
+            <div class="chart-container">
+                <h2>Insurance Covered (in ₹)</h2>
+                <canvas id="insuranceChart" data-chart="insuranceChart"></canvas>
+                <table class="data-table" id="insuranceTable"></table>
+            </div>
+        </div>
+    </div>
+    <div class="chart-popup" id="chartPopup">
+        <div class="popup-content">
+            <canvas id="popupCanvas" class="popup-chart"></canvas>
+            <span class="close-button" onclick="closeGraphPopup()">×</span>
+            <div id="popupInfo" class="tooltip-info"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        const data = {
+            illnesses: [3, 4, 2, 5, 3, 6, 4, 5, 3, 4, 2, 3], // Replace with real data
+            hospitalizations: [1, 2, 1, 3, 2, 4, 2, 3, 1, 2, 1, 2], // Replace with real data
+            moneySpent: [15000, 25000, 20000, 35000, 30000, 45000, 35000, 40000, 25000, 30000, 20000, 25000], // Increased monetary values
+            doctorVisits: [10, 7, 5, 3, 5, 8, 6, 9, 7, 4, 6, 8], // Corrected doctor visit data
+            insuranceCovered: [12000, 16000, 13000, 20000, 15000, 22000, 18000, 19000, 14000, 15000, 12000, 14000] // Increased insurance coverage
+        };
+
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const doctorNames = ['Dr. Smith', 'Dr. Brown', 'Dr. Patil', 'Dr. Lee', 'Dr. Chen', 'Dr. Kim', 'Dr. Rodriguez', 'Dr. Martinez','Dr.Markhande','Dr.Gaikwad','Dr.Shaikh','Dr.Patel'];
+        const hospitalNames = ['Mercy Hospital', 'City Hospital', 'Grace Hospital', 'Memorial Hospital', 'Unity Hospital', 'Sunrise Hospital', 'Evergreen Hospital', 'Riverside Hospital', 'Oakwood Hospital', 'Parkview Hospital', 'Pinecrest Hospital', 'Greenfield Hospital'];
+
+        // Function to render charts
+        const renderChart = (canvasId, label, data, names) => {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data.map((value, index) => ({ x: labels[index], y: value, name: names ? names[index] : null })),
+                        fill: false,
+                        borderColor: 'blue',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: () => 'View Full Graph',
+                                label: (context) => {
+                                    const value = context.parsed.y || 0;
+                                    return names ? `${names[context.dataIndex]}: ${value}` : `${value}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            ctx.canvas.addEventListener('click', function(evt) {
+                const chartPopup = document.getElementById('chartPopup');
+                const popupCanvas = document.getElementById('popupCanvas');
+                const popupInfo = document.getElementById('popupInfo');
+                const popupCtx = popupCanvas.getContext('2d');
+
+                chartPopup.style.display = 'block';
+                popupCanvas.width = window.innerWidth;
+                popupCanvas.height = window.innerHeight;
+                popupCtx.clearRect(0, 0, popupCanvas.width, popupCanvas.height);
+                popupCtx.drawImage(ctx.canvas, 0, 0, popupCanvas.width, popupCanvas.height);
+                const element = chart.getElementAtEvent(evt)[0];
+                if (element) {
+                    const bounds = element.getBoundingClientRect();
+                    popupInfo.style.display = 'block';
+                    popupInfo.style.top = bounds.top + window.scrollY - popupInfo.offsetHeight + 'px';
+                    popupInfo.style.left = bounds.left + window.scrollX + 'px';
+                    popupInfo.textContent = `${element.dataset.data[element.dataIndex].name || ''}: ${element.parsed.y}`;
+                } else {
+                    popupInfo.style.display = 'none';
+                }
+            });
+        };
+
+        // Function to close the full graph view
+        const closeGraphPopup = () => {
+            const chartPopup = document.getElementById('chartPopup');
+            chartPopup.style.display = 'none';
+        };
+
+        // Function to render tables
+        const renderTable = (tableId, label, data, names) => {
+            const table = document.getElementById(tableId);
+            table.innerHTML = `<tr><th>Month</th><th>${label}</th></tr>`;
+            for (let i = 0; i < labels.length; i++) {
+                if (label === 'Doctor Visits' || label === 'Hospitalization Count') {
+                    table.innerHTML += `<tr><td>${labels[i]}</td><td>${names ? names[i] : ''}: ${data[i]}</td></tr>`;
+                } else {
+                    table.innerHTML += `<tr><td>${labels[i]}</td><td>${data[i]}</td></tr>`;
+                }
+            }
+        };
+
+        // Render charts and tables
+        renderChart('illnessChart', 'Illness Count', data.illnesses);
+        renderTable('illnessTable', 'Illness Count', data.illnesses);
+
+        renderChart('hospitalizationChart', 'Hospitalization Count', data.hospitalizations, hospitalNames);
+        renderTable('hospitalizationTable', 'Hospitalization Count', data.hospitalizations, hospitalNames);
+
+        renderChart('moneySpentChart', 'Money Spent (in ₹)', data.moneySpent);
+        renderTable('moneySpentTable', 'Money Spent (in ₹)', data.moneySpent);
+
+        renderChart('doctorVisitsChart', 'Doctor Visits', data.doctorVisits, doctorNames);
+        renderTable('doctorVisitsTable', 'Doctor Visits', data.doctorVisits, doctorNames);
+
+        renderChart('insuranceChart', 'Insurance Covered (in ₹)', data.insuranceCovered);
+        renderTable('insuranceTable', 'Insurance Covered (in ₹)', data.insuranceCovered);
+    </script>
+</body>
+</html>

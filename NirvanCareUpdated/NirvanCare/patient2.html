@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PatientCount-NirvanCare</title>
+<style>
+ body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ADD8E6;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes up at least the height of the viewport */
+  }
+  header {
+    background-color: #1E90FF;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative; /* Position the header relatively */
+  }
+  header img {
+    width: 250px;
+    height: auto;
+  }
+  nav {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    position: absolute; /* Position the navigation bar absolutely */
+    bottom: 510px; /* Shift the navigation bar 20 pixels upwards from the bottom of the header */
+    width: 100%; /* Make the navigation bar span the full width of the header */
+    left: 0; /* Align the left side of the navigation bar with the left side of the header */
+}
+
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+  nav a:hover {
+    background-color: #555;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0;
+    flex:1; /* Allow the content area to expand */
+  }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .stats p {
+    margin: 0;
+  }
+  .patient-table {
+    width: 90%; /* Adjust the width as needed */
+    max-width: 1000px; /* Limit the maximum width if necessary */
+    border-collapse: collapse;
+    margin: 20px auto; /* Center the table horizontally */
+  }
+  .patient-table th, .patient-table td {
+    border: 1px solid #1E90FF;
+    padding: 10px;
+    text-align: center;
+  }
+  .patient-table th {
+    background-color: #1E90FF;
+    color: #fff;
+  }
+  .patient-table tr:nth-child(even) {
+    background-color: #333;
+  }
+  .patient-table tr:nth-child(odd) {
+    background-color: #222;
+  }
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+<header>
+  <img src="C:\Users\saura\OneDrive\Desktop\hd logo.png" alt="Logo" id="clinic-logo">
+</header>
+<nav>
+        <a href="intro.html">Home</a>
+        <a href="aboutus.html" target="_blank">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#founders">Contact Us</a>
+    </nav>
+	<br>
+	<br>
+
+<div class="container">
+  <form id="date-form">
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" required>
+    <button type="submit">Get Patient Information</button>
+  </form>
+  <div class="stats">
+    <p>Doctor: Dr. Smith</p>
+    <p>Date: <span id="selected-date"></span></p>
+  </div>
+  <div class="stats">
+    <p>Patient Count: <span id="patient-count">0</span></p>
+  </div>
+  <table class="patient-table" id="patient-table">
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Time</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Patient entries will be dynamically added here -->
+    </tbody>
+  </table>
+</div>
+<script>
+  document.getElementById('date-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var selectedDate = document.getElementById('date').value;
+    document.getElementById('selected-date').textContent = selectedDate;
+    // Clear previous patient data
+    document.querySelector('#patient-count').textContent = 0;
+    var patientTableBody = document.querySelector('#patient-table tbody');
+    patientTableBody.innerHTML = '';
+    // Example usage: fetchData(selectedDate);
+    // Here you should implement the logic to fetch patient data for the selected date
+    // and then populate the patient table
+    // For demonstration, I'll simulate patient data
+    var patientData = [
+      { name: 'John Doe', time: '10:00 AM', date: selectedDate },
+      { name: 'Jane Smith', time: '11:30 AM', date: selectedDate },
+      { name: 'Alice Johnson', time: '2:15 PM', date: selectedDate },
+	  { name: 'John Doe', time: '10:00 AM', date: selectedDate },
+      { name: 'Jane Smith', time: '11:30 AM', date: selectedDate },
+      { name: 'Alice Johnson', time: '2:15 PM', date: selectedDate },
+	  { name: 'John Doe', time: '10:00 AM', date: selectedDate },
+      { name: 'Jane Smith', time: '11:30 AM', date: selectedDate },
+      { name: 'Alice Johnson', time: '2:15 PM', date: selectedDate }
+    ];
+    patientData.forEach(function(patient) {
+      var row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${patient.name}</td>
+        <td>${patient.time}</td>
+        <td>${patient.date}</td>
+      `;
+      patientTableBody.appendChild(row);
+    });
+    // Update patient count
+    document.querySelector('#patient-count').textContent = patientData.length;
+  });
+</script>
+
+<footer class="footer">
+  <p>&copy; 2024 NirvanCare. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

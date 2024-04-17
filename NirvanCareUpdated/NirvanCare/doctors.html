@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor's Daily Schedule-NirvanCare</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes up at least the height of the viewport */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    animation: slideshow 30s linear infinite; /*  */
+    background-image: url('https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  }
+
+  header {
+    background-color: #383838;
+    color: #383838;
+    padding: 1px 0; /* Adjusted padding */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1; /* Ensure header is above background images */
+}
+
+
+  header img {
+    max-height: 150px; /* Adjusted logo height */
+    margin-top: 10px; /* Adjusted margin */
+  }
+
+ header h1 {
+    font-size: 28px; /* Adjusted font size */
+    margin-top: 1px; /* Adjusted margin */
+    margin-bottom: 0; /* Remove bottom margin */
+}
+
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    flex: 1; /* Allow the content area to expand */
+    position: relative;
+    z-index: 1; /* Ensure content is above background images */
+  }
+
+  .schedule {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .event {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .event:hover {
+    transform: translateY(-5px);
+  }
+
+  .event h3 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+
+  .event p {
+    margin: 10px 0;
+  }
+
+  .event.opd { background-color: #ffc107; }
+  .event.rounds { background-color: #28a745; }
+  .event.home-visit { background-color: #007bff; }
+  .event.board-meeting { background-color: #dc3545; }
+  .event.clinic { background-color: #17a2b8; }
+
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+    margin-top: auto; /* Push the footer to the bottom */
+    position: relative;
+    z-index: 1; /* Ensure footer is above background images */
+  }
+
+  @keyframes slideshow {
+    0% {
+      background-position: 100% 0, 100% 0, 100% 0; /* Starting position for all images */
+    }
+    100% {
+      background-position: calc(100% - 400px) 0, calc(100% - 200px) 0, 100% 0; /* Ending position for all images */
+    }
+  }
+
+  nav {
+    text-align: center;
+    padding: 10px 0;
+    background-color:	 #404040;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+
+  nav a:hover {
+    background-color: #555;
+  }
+</style>
+</head>
+<body>
+<header>
+  <img src="C:\Users\saura\OneDrive\Desktop\hd logo.png" alt="Logo">
+  <h1>Doctor's Daily Schedule</h1>
+</header>
+
+<nav>
+    <a href="intro.html">Home</a>
+    <a href="aboutus.html" target="_blank">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#founders">Contact Us</a>
+</nav>
+
+<div class="container">
+  <div class="schedule">
+    <div class="event opd">
+      <h3>OPD</h3>
+      <p>Time: 9:00 AM - 1:00 PM</p>
+      <p>Location: Hospital OPD</p>
+    </div>
+    <div class="event rounds">
+      <h3>Rounds</h3>
+      <p>Time: 2:00 PM - 4:00 PM</p>
+      <p>Location: Patient Wards</p>
+    </div>
+    <div class="event home-visit">
+      <h3>Home Visit</h3>
+      <p>Time: 4:30 PM - 6:00 PM</p>
+      <p>Location: Patient's Home</p>
+    </div>
+    <div class="event board-meeting">
+      <h3>Board Meeting</h3>
+      <p>Time: 6:30 PM - 8:00 PM</p>
+      <p>Location: Conference Room</p>
+    </div>
+    <div class="event clinic">
+      <h3>Clinic</h3>
+      <p>Time: 8:30 PM - 10:00 PM</p>
+      <p>Location: Private Clinic</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2024 NirvanCare. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

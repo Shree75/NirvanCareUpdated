@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription-NirvanCare</title>
+    <style>
+        /* Reset margin and padding for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://e0.pxfuel.com/wallpapers/181/282/desktop-wallpaper-medical-and-background-doctor-medicine.jpg');
+            background-size: cover;
+            background-repeat: continuous;
+            position: relative;
+        }
+        
+        /* Navigation bar styling */
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure the navigation bar is on top of other elements */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .patient-info {
+            margin-bottom: 20px;
+        }
+        
+        .patient-info label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .prescription-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .prescription-table th,
+        .prescription-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+        
+        .prescription-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .add-row-btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .add-row-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .send-btn {
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .send-btn:hover {
+            background-color: #005f6b;
+        }
+
+        #success-message {
+            display: none;
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #error-message {
+            display: none;
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Footer styling */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="intro.html">Home</a>
+        <a href="aboutus.html" target="_blank">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#founders">Contact Us</a>
+    </nav>
+
+    <div class="container">
+        <h1>Prescription Generator</h1>
+        <div class="patient-info">
+            <label for="patient-id">Patient ID:</label>
+            <input type="text" id="patient-id" placeholder="Enter Patient ID">
+        </div>
+        <table class="prescription-table">
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="prescription-table-body">
+                <tr>
+                    <td><input type="text" name="medicine" class="medicine-input" placeholder="Enter Medicine"></td>
+                    <td><input type="text" name="time" class="time-input" placeholder="Enter Time"></td>
+                    <td><button onclick="removeRow(this)" class="remove-row-btn">Remove</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="addRow()" class="add-row-btn">Add Row</button>
+        <button onclick="sendPrescription()" class="send-btn">Send Prescription</button>
+        <p id="success-message">Prescription sent successfully!</p>
+        <p id="error-message">Fill in the details!</p>
+    </div>
+
+    <footer>
+        &copy; 2024 All Rights Reserved NirvanCare
+    </footer>
+
+    <script>
+        function addRow() {
+            var tableBody = document.getElementById('prescription-table-body');
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" name="medicine" class="medicine-input" placeholder="Enter Medicine"></td>
+                <td><input type="text" name="time" class="time-input" placeholder="Enter Time"></td>
+                <td><button onclick="removeRow(this)" class="remove-row-btn">Remove</button></td>
+            `;
+            tableBody.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>

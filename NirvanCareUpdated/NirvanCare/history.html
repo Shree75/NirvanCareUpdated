@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient History</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ADD8E6;
+        color: #fff;
+    }
+	nav {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+
+  nav a:hover {
+    background-color: #555;
+  }
+
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color:#668cff;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #fff;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .patient-info {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .patient-info p {
+        margin: 10px 0;
+        font-size: 1.2rem;
+    }
+
+    .patient-photo {
+        display: block;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 5px solid #fff;
+    }
+
+    .additional-info {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .additional-info p {
+        margin: 5px 0;
+    }
+
+    .hospital-history {
+        margin-bottom: 30px;
+    }
+
+    .timeline {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .event {
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .event:hover {
+        background-color: #555;
+    }
+
+    .event-content h3 {
+        margin-top: 0;
+        color: #000000;
+    }
+
+    .event-content p {
+        color: #000000;
+    }
+
+    .hospital-details {
+        display: none;
+        background-color: #555;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .hospital-details.active {
+        display: block;
+    }
+
+    .footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #333;
+    padding: 10px;
+    background-color: #333; /* Add a background color */
+}
+
+    .full-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .full-page.active {
+        display: flex;
+    }
+
+    .page-content {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 80%;
+        max-height: 80%;
+        overflow: auto;
+        position: relative;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .pdf-icon {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .theme-button {
+        background-color: #555;
+        color: #fff;
+        border: none;
+        padding: 10px 50px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 20px;
+		margin-left:300px;
+    }
+
+    .theme-button:hover {
+        background-color: #777;
+    }
+</style>
+</head>
+<body>
+<nav>
+    <a href="intro.html">Home</a>
+    <a href="aboutus.html" target="_blank">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#founders">Contact Us</a>
+</nav>
+<div class="container">
+    <h1>Patient History</h1>
+    <div class="patient-info">
+        <img src="https://www.shutterstock.com/image-photo/passport-photo-portrait-middle-aged-260nw-1506715724.jpg" alt="Patient Photo" class="patient-photo">
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Place of Birth:</strong> New York City</p>
+        <p><strong>Date of Birth:</strong> January 1, 1980</p>
+        <p><strong>Aadhaar Card Number:</strong> 1234 5678 9012</p>
+        <p><strong>Medical Insurance:</strong> ABC Health Insurance</p>
+        <p><strong>Criminal Record:</strong> None</p>
+    </div>
+    <div class="hospital-history">
+        <h2>Hospital History</h2>
+        <ul class="timeline">
+            <li class="event" data-prescription="Medication X, Dosage Y">
+                <div class="event-content">
+                    <h3>Mercy Hospital</h3>
+                    <p>At Mercy Hospital in New York City, John Doe visited the Emergency Room on March 15, 2023, due to a sprained ankle. He received treatment including an X-ray, ice pack application, and pain medication. The prescribed medications included Ibuprofen, and he was advised to rest. No follow-up appointment was required.
+</p>
+                </div>
+            </li>
+            <li class="event" data-prescription="Medication Z, Dosage W">
+                <div class="event-content">
+                    <h3>General Hospital</h3>
+                    <p>At City General Hospital in Los Angeles, John Doe was admitted to the Orthopedics department on June 10, 2023, after sustaining a fractured wrist. Following treatment, which included casting and pain medication, he was discharged on June 12, 2023. The prescribed medication included Ibuprofen, and he was advised to rest. No follow-up appointment was deemed necessary.</p></div>
+            </li>
+            <li class="event" data-prescription="Medication A, Dosage B">
+                <div class="event-content">
+                    <h3>Unity Medical Center</h3>
+                    <p>At Unity Medical Center in Chicago, John Doe sought treatment for migraine headaches, leading to admission from September 5 to September 8, 2023, under the Neurology department. Treatment primarily involved medication and intravenous therapy, with prescriptions including Sumatriptan and fluids. A follow-up appointment for a neurological evaluation is scheduled in one month.</p> </div>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Move the button here -->
+   <button class="theme-button" onclick="changeTheme(); window.location.href = 'edit.html';">Edit Patient History</button>
+
+</div>
+
+<div class="footer">
+    <span style="color:white">Log in | © 2024 NirvanCare. All Rights Reserved.</span>
+</div>
+
+<div class="full-page" id="fullPage1">
+    <div class="page-content">
+        <span class="close-btn" onclick="closeFullPage('fullPage1')">&times;</span>
+        <h2>Mercy Hospital</h2>
+        <p><ol>
+    <li>Hospital Name: Mercy Hospital</li>
+    <li>Location: New York City</li>
+    <li>Department: Cardiology</li>
+    <li>Admission Date: March 15, 2023</li>
+    <li>Discharge Date: March 20, 2023</li>
+    <li>Reason for Visit: Chest Pain</li>
+    <li>Diagnosis: Suspected Myocardial Infarction</li>
+    <li>Procedures:
+        <ul>
+            <li>ECG</li>
+            <li>Blood Tests</li>
+            <li>Echocardiogram</li>
+        </ul>
+    </li>
+    <li>Treatment: Administered medication, Monitored closely</li>
+    <li>Prescription:
+        <ul>
+            <li>Aspirin</li>
+            <li>Nitroglycerin</li>
+            <li>Beta-blockers</li>
+        </ul>
+    </li>
+    <li>Follow-up: Scheduled for a cardiac stress test in three months</li>
+</ol>
+</p>
+        <p><strong>Prescription:</strong> Medication X, Dosage Y</p>
+        <center><a href="sample.pdf" class="pdf-icon" target="_blank" rel="noopener noreferrer">X-ray</a></center>
+    </div>
+</div>
+
+<div class="full-page" id="fullPage2">
+    <div class="page-content">
+        <span class="close-btn" onclick="closeFullPage('fullPage2')">&times;</span>
+        <h2>City General Hospital</h2>
+        <p><ol>
+    <li>Hospital Name: City General Hospital</li>
+    <li>Location: Los Angeles</li>
+    <li>Department: Orthopedics</li>
+    <li>Admission Date: June 10, 2023</li>
+    <li>Discharge Date: June 12, 2023</li>
+    <li>Reason for Visit: Fractured Wrist</li>
+    <li>Treatment: 
+        <ul>
+            <li>Casting</li>
+            <li>Pain Medication</li>
+        </ul>
+    </li>
+    <li>Prescription: 
+        <ul>
+            <li>Ibuprofen</li>
+            <li>Rest</li>
+        </ul>
+    </li>
+    <li>Follow-up: None required</li>
+</ol>
+<p><strong>Prescription:</strong> Medication Z, Dosage W</p><br><br>
+        <a href="sample.pdf" class="pdf-icon" target="_blank" rel="noopener noreferrer">Scan</a>
+    </div>
+</div>
+
+<div class="full-page" id="fullPage3">
+    <div class="page-content">
+        <span class="close-btn" onclick="closeFullPage('fullPage3')">&times;</span>
+        <h2>Unity Medical Center</h2>
+        <p> <ol>
+    <li>Hospital Name: Unity Medical Center</li>
+    <li>Location: Chicago</li>
+    <li>Department: Neurology</li>
+    <li>Admission Date: September 5, 2023</li>
+    <li>Discharge Date: September 8, 2023</li>
+    <li>Reason for Visit: Migraine Headaches</li>
+    <li>Treatment: 
+        <ul>
+            <li>Medication</li>
+            <li>Intravenous Therapy</li>
+        </ul>
+    </li>
+    <li>Prescription: 
+        <ul>
+            <li>Sumatriptan</li>
+            <li>Fluids</li>
+        </ul>
+    </li>
+    <li>Follow-up: Scheduled neurological evaluation in one month</li>
+</ol><p><br>
+        <a href="sample.pdf" class="pdf-icon" target="_blank" rel="noopener noreferrer">MRI</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const events = document.querySelectorAll(".event");
+
+        events.forEach(function(event, index) {
+            event.addEventListener("click", function() {
+                const fullPageId = "fullPage" + (index + 1);
+                openFullPage(fullPageId);
+            });
+        });
+    });
+
+    function openFullPage(id) {
+        const fullPage = document.getElementById(id);
+        fullPage.classList.add("active");
+    }
+
+    function closeFullPage(id) {
+        const fullPage = document.getElementById(id);
+        fullPage.classList.remove("active");
+    }
+
+    function changeTheme() {
+        // Toggle between light and dark themes by toggling a class on the body
+        document.body.classList.toggle('light-theme');
+    }
+</script>
+</body>
+</html>

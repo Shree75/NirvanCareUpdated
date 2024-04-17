@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NirvanCare - Patient Prescription</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ADD8E6;
+            color: #fff;
+        }
+        header {
+            background-color:#0f3057 ;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+        .logo {
+            max-width: 250px;
+        }
+        nav {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            width: 100%; /* Ensure navbar spans full width */
+            position: fixed; /* Fix the navbar position */
+            top: 55px; /* Adjust according to header height */
+            z-index: 999; /* Ensure navbar is above other content */
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            margin-top: 80px; /* Adjust according to header height */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 120px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 3px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            color: #000000;
+        }
+        th {
+            background-color:#fff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        td {
+            font-size: 0.9em;
+        }
+        td.total {
+            font-weight: bold;
+        }
+        footer {
+            background-color: #0f3057;
+            color: white;
+            text-align: center;
+            padding: 1px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 150px; /* Adjust according to header height */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="C:\Users\saura\OneDrive\Desktop\hd logo.png" alt="NirvanCare Logo">
+    </header>
+	
+    <!-- Navbar -->
+    <nav>
+        <a href="intro.html">Home</a>
+        <a href="aboutus.html" target="_blank">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#founders">Contact Us</a>
+    </nav>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Doctor & Hospital</th>
+                    <th>Medicine</th>
+                    <th>Time to be Taken</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3" style="font-size: 1.2em;">Dr. Sarah Smith</td>
+                    <td rowspan="3" style="font-size: 1.2em;">City Hospital</td>
+                    <td>Acetaminophen.</td>
+                    <td>Morning, Afternoon, Night</td>
+                    <td>&#x20B9;250</td>
+                </tr>
+                <tr>
+                    <td>Amitriptyline.</td>
+                    <td>Afternoon, Night</td>
+                    <td>&#x20B9;500</td>
+                </tr>
+                <tr>
+                    <td>Atorvastatin.</td>
+                    <td>Morning, Night</td>
+                    <td>&#x20B9;2000</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="total">Total</td>
+                    <td class="total">&#x20B9;2750</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; 2024 NirvanCare. All Rights Reserved</p>
+    </footer>
+</body>
+</html>

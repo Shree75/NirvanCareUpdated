@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NirvanCare 2024</title>
+  <style>
+   body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #FFFFFF;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+
+    header, footer {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      max-width: 250px;
+    }
+      ..container {
+    width: 80%; /* Reduce the width of the container */
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    flex: 1; /* Occupy remaining vertical space */
+    border: 2px solid black; /* Add a black outline border */
+}
+
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background: rgba(169, 169, 169, 0.3); /* Grey background for other inputs */
+      color: #000000;
+      font-size: 16px;
+      outline: none;
+    }
+    input[type="text"]::placeholder,
+    input[type="tel"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background: #4CAF50; /* Green background for submit button */
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background: #45a049; /* Darker green on hover */
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+   <img src="C:\Users\saura\OneDrive\Desktop\hd logo.png" alt="NirvanCare Logo">
+  </header>
+  
+  <div class="container">
+  <h2 style="text-align: center; color: black;">Welcome to NirvanCare 2024</h2>
+
+    <form id="patientForm" action="history.html" method="GET">
+      <!-- Form content here -->
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+      <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+      <input type="submit" value="Submit">
+    </form>
+    
+    <!-- Result page here -->
+    <div id="resultPage">
+      <!-- Result content here -->
+    </div>
+
+    <!-- Content from another HTML page will be inserted here -->
+    <div id="externalPageContent">
+      <!-- Content will be dynamically loaded here -->
+    </div>
+
+    <!-- Patient history content -->
+    <div id="patientHistory">
+      <!-- Content from history.html will be inserted here -->
+    </div>
+  </div>
+
+  <footer>
+  &copy; 2024 NirvanCare. All rights reserved
+  </footer>
+</body>
+</html>
